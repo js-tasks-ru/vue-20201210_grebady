@@ -7,13 +7,19 @@ const API_URL = 'https://course-vue.javascript.ru/api';
 const MEETUP_ID = 6;
 
 /**
- * Возвращает ссылку на изображение по идентификатору, например, изображение митапа
- * @param imageId {number} - идентификатор изображения
- * @return {string} - ссылка на изображение
+ * Функция, возвращая словарь иконок для для всех типов пунктов программы.
+ * Соответствует имени иконок в директории /assets/icons
  */
-function getImageUrlByImageId(imageId) {
-  return `${API_URL}/images/${imageId}`;
-}
+const getAgendaItemIcons = () => ({
+  registration: 'key',
+  opening: 'cal-sm',
+  talk: 'tv',
+  break: 'clock',
+  coffee: 'coffee',
+  closing: 'key',
+  afterparty: 'cal-sm',
+  other: 'cal-sm',
+});
 
 /**
  * Функция, возвращающая словарь заголовков по умолчанию для всех типов пунктов программы
@@ -29,40 +35,61 @@ const getAgendaItemDefaultTitles = () => ({
   other: 'Другое',
 });
 
-/**
- * Функция, возвращая словарь иконок для для всех типов пунктов программы.
- * Соответствует имени иконок в директории /assets/icons
- */
-const getAgendaItemIcons = () => ({
-  registration: 'key',
-  opening: 'cal-sm',
-  talk: 'tv',
-  break: 'clock',
-  coffee: 'coffee',
-  closing: 'key',
-  afterparty: 'cal-sm',
-  other: 'cal-sm',
-});
-
 export const app = new Vue({
   el: '#app',
 
   data() {
     return {
-      // Требуется хранить данные митапа
+      rawMeetup: null,
     };
   },
 
-  mounted() {
-    // Требуется получить данные митапа с API
+  async mounted() {
+    this.rawMeetup = await this.getMeetup(MEETUP_ID);
   },
 
   computed: {
-    // Возможно, здесь помогут вычисляемые свойства
+    meetup() {
+      const rawMeet = this.rawMeetup;
+
+      if (!rawMeet) return null;
+      return {
+        ...rawMeet,
+        coverStyle: rawMeet.imageId
+          ? {
+              '--bg-url': `url(https://course-vue.javascript.ru/api/images/${rawMeet.imageId})`,
+            }
+          : undefined,
+        dateOnlyString: new Date(rawMeet.date).toISOString().split('T')[0],
+        localDate: new Date(rawMeet.date).toLocaleString(navigator.language, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        }),
+      };
+    },
+
+    agenda() {
+      const rawMeet = this.rawMeetup;
+
+      if (!rawMeet) return null;
+
+      return rawMeet.agenda.map((item) => {
+        if (item.title === null) item.title = getAgendaItemDefaultTitles()[item.type];
+        item.icon = getAgendaItemIcons()[item.type];
+        return item;
+      });
+    },
   },
 
   methods: {
-    // Получение данных с API предпочтительнее оформить отдельным методом,
-    // а не писать прямо в mounted()
+    async getMeetup(id) {
+      const response = await fetch(`${API_URL}/meetups/${id}`);
+      return await response.json();
+    },
+    async getMeetupImg(idImg) {
+      const response = await fetch(`${API_URL}/images/${idImg}`);
+      return await response.blob();
+    },
   },
 });
