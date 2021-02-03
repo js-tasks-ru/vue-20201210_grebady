@@ -87,9 +87,5 @@ export const app = new Vue({
       const response = await fetch(`${API_URL}/meetups/${id}`);
       return await response.json();
     },
-    async getMeetupImg(idImg) {
-      const response = await fetch(`${API_URL}/images/${idImg}`);
-      return await response.blob();
-    },
   },
 });
