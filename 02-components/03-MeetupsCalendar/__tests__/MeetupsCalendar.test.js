@@ -1,4 +1,4 @@
-const { shallowMount } = require('@vue/test-utils');
+const { mount } = require('@vue/test-utils');
 const { getSolutionPath } = require('taskbook-test-utils');
 const { MeetupsCalendar } = require(getSolutionPath('MeetupsCalendar'));
 import { meetups } from './__fixtures__/meetups';
@@ -52,7 +52,7 @@ function testMonthCalendar(
 describe('components/MeetupsCalendar', () => {
   describe('MeetupsCalendar', () => {
     it('MeetupsCalendar должен иметь обязательный параметр meetups по списком митапов', () => {
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       expect(wrapper.vm.$options.props.meetups.type).toBe(Array);
@@ -61,7 +61,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен вывести 5 строк по 7 дней для апреля 2020', () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       const cells = wrapper.findAll('.rangepicker__cell').wrappers;
@@ -70,7 +70,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен вывести только первые два и последние три дня для апреля 2020 неактивными', () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       const cells = wrapper.findAll('.rangepicker__cell').wrappers;
@@ -79,7 +79,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен вывести правильные числа для апреля 2020', () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       const cells = wrapper.findAll('.rangepicker__cell').wrappers;
@@ -88,7 +88,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен локализовано месяц и год в заголовке для апреля 2020', () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       const title = wrapper.find('.rangepicker__selector-controls div').text();
@@ -97,7 +97,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен вывести май 2020', () => {
       advanceTo(new Date('2020-05-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       testMonthCalendar(
@@ -111,7 +111,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен вывести июнь 2020', () => {
       advanceTo(new Date('2020-06-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       testMonthCalendar(wrapper, '2020-06-15', [], 30, [
@@ -125,7 +125,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен показать февраль 2021 после 10 кликов на след. месяц с апреля 2020', async () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       for (let i = 0; i < 10; i++) {
@@ -137,7 +137,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен показать февраль 2021 после 9 кликов на след. месяц с 31 мая 2020', async () => {
       advanceTo(new Date('2020-05-31'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       for (let i = 0; i < 9; i++) {
@@ -149,7 +149,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен показать ноябрь 2019 после 5 кликов на пред. месяц с апреля 2020', async () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups: [] },
       });
       for (let i = 0; i < 5; i++) {
@@ -163,7 +163,7 @@ describe('components/MeetupsCalendar', () => {
 
     it('MeetupsCalendar должен показать митапы 12 мая после перехода на следующий месяц с апреля 2020', async () => {
       advanceTo(new Date('2020-04-15'));
-      const wrapper = shallowMount(MeetupsCalendar, {
+      const wrapper = mount(MeetupsCalendar, {
         propsData: { meetups },
       });
       const button = wrapper.find('.rangepicker__selector-control-right');
