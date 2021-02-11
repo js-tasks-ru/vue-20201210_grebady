@@ -5,9 +5,7 @@ export const MeetupAgenda = {
 
   template: `
     <div class="meetup-agenda">
-      <template v-for="item in agenda">
-        <meetup-agenda-item :agendaItem="item"/>
-      </template>
+        <meetup-agenda-item v-for="item in agenda" :agendaItem="item"/>
     </div>`,
 
   // components

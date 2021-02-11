@@ -40,11 +40,13 @@ export const MeetupsCalendar = {
   // Вычислимые свойства помогут как с получением списка дней, так и с выводом информации
   computed: {
     localMonthStr() {
-      const dateStr = this.date.toLocaleString(navigator.language, {
-        year: 'numeric',
+      const month = this.date.toLocaleString(navigator.language, {
         month: 'long',
       });
-      return dateStr[0].toUpperCase() + dateStr.slice(1, -3);
+      const YYYY = this.date.toLocaleString(navigator.language, {
+        year: 'numeric',
+      });
+      return `${month} ${YYYY}`;
     },
 
     currentMonth() {
