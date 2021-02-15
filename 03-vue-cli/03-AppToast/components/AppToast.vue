@@ -1,30 +1,59 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success</span>
-    </div>
-    <div class="toast toast_error">
-      <app-icon icon="alert-circle" />
-      <span>Error</span>
-    </div>
+    <template v-for="toast in arrToasts">
+      <app-toast-error
+        v-if="toast.type === 'error'"
+        :message="toast.message"
+        :key="toast.id"
+      />
+      <app-toast-success
+        v-if="toast.type === 'success'"
+        :message="toast.message"
+        :key="toast.id"
+      />
+    </template>
   </div>
 </template>
 
 <script>
-import AppIcon from './AppIcon';
+import AppToastError from './AppToastError';
+import AppToastSuccess from './AppToastSuccess';
 
 const DELAY = 5000;
 
 export default {
   name: 'AppToast',
 
-  components: { AppIcon },
+  components: { AppToastError, AppToastSuccess },
 
   methods: {
-    error(message) {},
+    error(message) {
+      this.arrToasts.push({
+        id: Symbol('id'),
+        type: 'error',
+        message,
+      });
+      setTimeout(() => {
+        this.arrToasts.shift();
+      }, DELAY);
+    },
 
-    success(message) {},
+    success(message) {
+      this.arrToasts.push({
+        id: Symbol('id'),
+        type: 'success',
+        message,
+      });
+      setTimeout(() => {
+        this.arrToasts.shift();
+      }, DELAY);
+    },
+  },
+
+  data() {
+    return {
+      arrToasts: [],
+    };
   },
 };
 </script>
