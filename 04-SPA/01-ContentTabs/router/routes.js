@@ -1,20 +1,17 @@
-import PageA from '../views/PageA';
-import PageB from '../views/PageB';
-import BasePage from '../views/BasePage';
-
 export const routes = [
   {
     path: '/',
-    component: BasePage,
+    component: () => import('../views/BasePage'),
     children: [
       {
         path: 'a',
-        component: PageA,
+        name: 'a',
+        component: () => import('../views/PageA'),
       },
       {
         path: 'b',
         name: 'b',
-        component: PageB,
+        component: () => import('../views/PageB'),
       },
     ],
   },

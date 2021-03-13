@@ -1,6 +1,6 @@
 <template>
-  <content-tabs :tabs="tabs">
-    <router-view :prop="prop" />
+  <content-tabs :tabs="tabs" :prop="prop">
+    <router-view />
   </content-tabs>
 </template>
 

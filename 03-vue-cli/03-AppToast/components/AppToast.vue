@@ -29,7 +29,6 @@ export default {
   methods: {
     error(message) {
       this.arrToasts.push({
-        id: Symbol('id'),
         type: 'error',
         message,
       });
@@ -40,7 +39,6 @@ export default {
 
     success(message) {
       this.arrToasts.push({
-        id: Symbol('id'),
         type: 'success',
         message,
       });

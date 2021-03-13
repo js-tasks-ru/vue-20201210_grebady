@@ -1,9 +1,16 @@
 <template>
   <div class="content-tabs">
     <div class="content-tabs__nav">
-      <router-link v-for="(tab, index) in tabs" :to="tab.to" :key="index" class="content-tabs__tab" :active-class="'content-tabs__tab_active'">{{ tab.text }}</router-link>
+      <router-link
+        v-for="(tab, index) in tabs"
+        :to="tab.to"
+        :key="index"
+        class="content-tabs__tab"
+        :active-class="'content-tabs__tab_active'"
+        >{{ tab.text }}</router-link
+      >
     </div>
-    <div class="content-tabs__content">Content</div>
+    <div class="content-tabs__content">{{ routeProp }}</div>
   </div>
 </template>
 
@@ -14,6 +21,17 @@ export default {
     tabs: {
       type: Array,
       required: true,
+    },
+    prop: {
+      type: String,
+    },
+  },
+
+  computed: {
+    routeProp() {
+      return (this.$route && this.$route.name)
+        ? `${this.$route.name.toUpperCase()} | ${this.prop}`
+        : '';
     },
   },
 };
