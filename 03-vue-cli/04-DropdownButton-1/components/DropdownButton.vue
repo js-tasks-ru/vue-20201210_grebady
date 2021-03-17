@@ -6,8 +6,8 @@
       type="button"
     >
       <app-icon
-        v-show="selectedOption && selectedOption.icon"
-        :icon="selectedOption && selectedOption.icon ? selectedOption.icon : ''"
+        v-if="selectedOption && selectedOption.icon"
+        :icon="selectedOption.icon"
       />
       {{ value ? `${title} - ${selectedOption.text}` : `${title}` }}
     </button>
@@ -21,7 +21,7 @@
         type="button"
         @click="change(option.value)"
       >
-        <app-icon v-show="option.icon" :icon="option.icon ? option.icon : ''" />
+        <app-icon v-if="option.icon" :icon="option.icon" />
         {{ option.text }}
       </button>
     </div>
