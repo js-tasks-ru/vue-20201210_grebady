@@ -1,30 +1,36 @@
 <template>
   <div class="toasts">
     <template v-for="toast in arrToasts">
-      <app-toast-error
+      <div
         v-if="toast.type === 'error'"
-        :message="toast.message"
         :key="toast.id"
-      />
-      <app-toast-success
+        class="toast toast_error"
+      >
+        <app-icon icon="alert-circle" />
+        <span> {{ toast.message }}</span>
+      </div>
+
+      <div
         v-if="toast.type === 'success'"
-        :message="toast.message"
         :key="toast.id"
-      />
+        class="toast toast_success"
+      >
+        <app-icon icon="check-circle" />
+        <span>{{ toast.message }}</span>
+      </div>
     </template>
   </div>
 </template>
 
 <script>
-import AppToastError from './AppToastError';
-import AppToastSuccess from './AppToastSuccess';
+import AppIcon from './AppIcon';
 
 const DELAY = 5000;
 
 export default {
   name: 'AppToast',
 
-  components: { AppToastError, AppToastSuccess },
+  components: { AppIcon },
 
   methods: {
     error(message) {

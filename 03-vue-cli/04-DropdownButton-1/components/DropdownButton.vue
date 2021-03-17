@@ -5,15 +5,19 @@
       class="button dropdown__toggle dropdown__toggle_icon"
       type="button"
     >
-      <app-icon :icon="selectedIcon" />
-      {{ value ? `${title} - ${selectedText}` : `${title}` }}
+      <app-icon
+        v-show="selectedOption && selectedOption.icon"
+        :icon="selectedOption && selectedOption.icon ? selectedOption.icon : ''"
+      />
+      {{ value ? `${title} - ${selectedOption.text}` : `${title}` }}
     </button>
 
     <div class="dropdown__menu" :class="{ show: showList }">
       <button
         v-for="(option, index) in options"
         :key="index"
-        class="dropdown__item dropdown__item_icon"
+        class="dropdown__item"
+        :class="{dropdown__item_icon: options.some(element => !!element.icon)}"
         type="button"
         @click="change(option.value)"
       >
@@ -59,12 +63,11 @@ export default {
   },
 
   computed: {
-    selectedText() {
-      return (this.options.find(item => item.value === this.value)).text;
+    selectedOption() {
+      return this.options.find((item) => item.value === this.value);
     },
-    selectedIcon() {
-      return (this.options.find(item => item.value === this.value)).icon;
-    },
+
+
   },
 
   methods: {

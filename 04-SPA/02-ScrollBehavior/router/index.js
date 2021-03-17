@@ -5,7 +5,19 @@ Vue.use(VueRouter);
 
 export function scrollBehavior(to, from, savedPosition) {
   if (savedPosition) return savedPosition;
-  if (to.meta && from.meta &&'saveScrollPosition' in to.meta && 'saveScrollPosition' in from.meta) return false;
+  if (Array.isArray(to.matched) && Array.isArray(from.matched)) {
+    if (
+      to.matched.some((url) => url.meta && 'saveScrollPosition' in url.meta) &&
+      from.matched.some((url) => url.meta && 'saveScrollPosition' in url.meta)
+    )
+      return false;
+  } else if (
+    to.meta &&
+    from.meta &&
+    'saveScrollPosition' in to.meta &&
+    'saveScrollPosition' in from.meta
+  )
+    return false;
 
   if (to.hash) {
     return {
