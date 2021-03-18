@@ -17,7 +17,7 @@
         v-for="(option, index) in options"
         :key="index"
         class="dropdown__item"
-        :class="{dropdown__item_icon: options.some(element => !!element.icon)}"
+        :class="{ dropdown__item_icon: isDropdownItemIcon }"
         type="button"
         @click="change(option.value)"
       >
@@ -66,8 +66,9 @@ export default {
     selectedOption() {
       return this.options.find((item) => item.value === this.value);
     },
-
-
+    isDropdownItemIcon() {
+      return this.options.some((element) => element.icon);
+    },
   },
 
   methods: {

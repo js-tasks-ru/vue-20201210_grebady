@@ -2,21 +2,15 @@
   <div class="toasts">
     <template v-for="toast in arrToasts">
       <div
-        v-if="toast.type === 'error'"
         :key="toast.id"
-        class="toast toast_error"
+        class="toast"
+        :class="{
+          toast_error: toast.type === 'error',
+          toast_success: toast.type === 'success',
+        }"
       >
-        <app-icon icon="alert-circle" />
+        <app-icon :icon="toast.icon" />
         <span> {{ toast.message }}</span>
-      </div>
-
-      <div
-        v-if="toast.type === 'success'"
-        :key="toast.id"
-        class="toast toast_success"
-      >
-        <app-icon icon="check-circle" />
-        <span>{{ toast.message }}</span>
       </div>
     </template>
   </div>
@@ -36,6 +30,7 @@ export default {
     error(message) {
       this.arrToasts.push({
         type: 'error',
+        icon: 'alert-circle',
         message,
       });
       setTimeout(() => {
@@ -46,6 +41,7 @@ export default {
     success(message) {
       this.arrToasts.push({
         type: 'success',
+        icon: 'check-circle',
         message,
       });
       setTimeout(() => {
@@ -53,7 +49,6 @@ export default {
       }, DELAY);
     },
   },
-
   data() {
     return {
       arrToasts: [],

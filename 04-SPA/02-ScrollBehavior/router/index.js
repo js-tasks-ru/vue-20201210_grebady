@@ -3,15 +3,15 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+const hasMetaSavePosition = (route) =>
+  route.matched.some((matched) => matched.meta.saveScrollPosition);
+
 export function scrollBehavior(to, from, savedPosition) {
   if (savedPosition) return savedPosition;
-  if (Array.isArray(to.matched) && Array.isArray(from.matched)) {
-    if (
-      to.matched.some((url) => url.meta && 'saveScrollPosition' in url.meta) &&
-      from.matched.some((url) => url.meta && 'saveScrollPosition' in url.meta)
-    )
-      return false;
-  } else if (
+
+  if (hasMetaSavePosition(to) && hasMetaSavePosition(from)) return false;
+
+  if (
     to.meta &&
     from.meta &&
     'saveScrollPosition' in to.meta &&

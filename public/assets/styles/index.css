@@ -1,5 +1,5 @@
 @import "_variables.css";
-@import "03-vue-cli/04-DropdownButton-1/assets/styles/_button.css";
+@import "_button.css";
 @import "_typography.css";
 @import "_form-check.css";
 @import "_common_forms.css";
@@ -11,7 +11,7 @@
 @import "_forms.css";
 @import "_toast.css";
 @import "_checkbox.css";
-@import "03-vue-cli/04-DropdownButton-1/assets/styles/_dropdown.css";
+@import "_dropdown.css";
 @import "_header.css";
 @import "_page-tabs.css";
 @import "_content-tabs.css";
