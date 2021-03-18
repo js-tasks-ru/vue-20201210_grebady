@@ -1,10 +1,10 @@
 const { getSolutionPath } = require('taskbook-test-utils');
 const { scrollBehavior } = require(getSolutionPath('router/index.js'));
 
-function createRoute(record = { hash: undefined, meta: {} }) {
+function createRoute(record = {}) {
   const route = {
     name: 'name',
-    meta: record.meta,
+    meta: record.meta ?? {},
     path: '/',
     hash: record.hash,
     query: {},
