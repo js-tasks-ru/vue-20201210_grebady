@@ -12,5 +12,15 @@ export const router = new VueRouter({
       path: '/',
       component: IndexPage,
     },
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import('../views/LoginPage'),
+    },
+    {
+      name: 'register',
+      path: '/register',
+      component: () => import('../views/RegisterPage'),
+    },
   ],
 });
