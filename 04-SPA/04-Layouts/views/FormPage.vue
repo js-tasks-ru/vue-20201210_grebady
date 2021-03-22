@@ -1,5 +1,5 @@
 <template>
-  <form-layout title="Создать митап">
+  <form-layout :title="'Создать митап'">
     <form>Meetup Form</form>
   </form-layout>
 </template>

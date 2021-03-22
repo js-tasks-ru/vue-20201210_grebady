@@ -7,8 +7,8 @@
         :key="index"
         class="content-tabs__tab"
         :active-class="'content-tabs__tab_active'"
-        >{{ tab.text }}</router-link
-      >
+        >{{ tab.text }}
+      </router-link>
     </div>
     <div class="content-tabs__content"><slot></slot></div>
   </div>

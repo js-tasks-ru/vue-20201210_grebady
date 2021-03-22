@@ -11,14 +11,6 @@ export function scrollBehavior(to, from, savedPosition) {
 
   if (hasMetaSavePosition(to) && hasMetaSavePosition(from)) return false;
 
-  if (
-    to.meta &&
-    from.meta &&
-    'saveScrollPosition' in to.meta &&
-    'saveScrollPosition' in from.meta
-  )
-    return false;
-
   if (to.hash) {
     return {
       selector: to.hash,

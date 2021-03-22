@@ -1,5 +1,5 @@
 <template>
-  <auth-layout title="Вход">
+  <auth-layout :title="'Вход'">
     <form>Auth Page</form>
   </auth-layout>
 </template>
