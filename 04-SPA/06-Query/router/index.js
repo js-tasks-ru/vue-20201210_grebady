@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import PageWithQuery from '../views/PageWithQuery';
 
 Vue.use(VueRouter);
 
@@ -10,7 +9,7 @@ export const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: PageWithQuery,
+      component: () => import('../views/PageWithQuery'),
     },
   ],
 });

@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import PageA from '../views/PageA';
-import PageB from '../views/PageB';
-import NotFoundPage from '../views/NotFoundPage';
 
 Vue.use(VueRouter);
 
@@ -12,11 +9,15 @@ export const router = new VueRouter({
   routes: [
     {
       path: '/page-a',
-      component: PageA,
+      component: () => import('../views/PageA'),
     },
     {
       path: '/page-b',
-      component: PageB,
+      component: () => import('../views/PageB'),
+    },
+    {
+      path: '*',
+      component: () => import('../views/NotFoundPage'),
     },
   ],
 });

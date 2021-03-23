@@ -1,16 +1,39 @@
 <template>
   <div class="content-tabs">
     <div class="content-tabs__nav">
-      <a href="#" class="content-tabs__tab">Page A</a>
-      <a href="#" class="content-tabs__tab">Page B</a>
+      <router-link
+        v-for="(tab, index) in tabs"
+        :to="tab.to"
+        :key="index"
+        class="content-tabs__tab"
+        :active-class="'content-tabs__tab_active'"
+        >{{ tab.text }}
+      </router-link>
     </div>
-    <div class="content-tabs__content">Content</div>
+    <div class="content-tabs__content"><slot></slot></div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ContentTabs',
+  props: {
+    tabs: {
+      type: Array,
+      required: true,
+    },
+    prop: {
+      type: String,
+    },
+  },
+
+  computed: {
+    routeProp() {
+      return (this.$route && this.$route.name)
+        ? `${this.$route.name.toUpperCase()} | ${this.prop}`
+        : '';
+    },
+  },
 };
 </script>
 

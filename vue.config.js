@@ -71,4 +71,7 @@ function generatePagesConfig(taskList) {
 
 module.exports = {
   pages: generatePagesConfig(discoverVueServeTasksDirs(__dirname)),
+  configureWebpack: {
+    devtool: 'source-map',
+  },
 };

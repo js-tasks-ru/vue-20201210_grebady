@@ -4,7 +4,7 @@ export const RangepickerCell = {
   <div class="rangepicker__cell"
   :class="{rangepicker__cell_inactive: !isActive}"
     >{{ day.day }}
-        <rangepicker-event v-for="meetup in day.meetups" :event="meetup"/>
+        <rangepicker-event v-for="(meetup, index) in day.meetups" :key="index" :event="meetup"/>
   </div>`,
 
   props: {

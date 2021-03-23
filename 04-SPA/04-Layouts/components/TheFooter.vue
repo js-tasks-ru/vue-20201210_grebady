@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <footer class="footer">
+    <div class="container">© 2020. learn.javascript.ru</div>
+  </footer>
+</template>
 
 <script>
 export default {
@@ -6,4 +10,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+</style>
