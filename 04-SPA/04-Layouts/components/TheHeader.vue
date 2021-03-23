@@ -2,8 +2,8 @@
   <header class="header">
     <div>
       <h1>
-        <a href="/" class="router-link-exact-active router-link-active">
-          <img src="/assets/logo.svg" alt="Meetups"/></a>
+        <router-link to="/" class="router-link-exact-active router-link-active">
+          <img src="/assets/logo.svg" alt="Meetups"/></router-link>
       </h1>
     </div>
     <nav>
