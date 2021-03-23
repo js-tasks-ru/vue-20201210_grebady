@@ -12,14 +12,6 @@
 <script>
 import MeetupsView from '../components/MeetupsView';
 
-function isEmpty(obj) {
-  for (let key in obj) {
-    // если тело цикла начнет выполняться - значит в объекте есть свойства
-    return false;
-  }
-  return true;
-}
-
 export default {
   name: 'PageWithQuery',
   components: { MeetupsView },
@@ -34,14 +26,11 @@ export default {
       set: function (newValue) {
         const query = { ...this.$route.query, view: newValue };
         if (newValue === 'list') delete query.view;
-        if (query !== this.$route.query && !isEmpty(query))
-          try {
-            this.$router.push({ query });
-          } catch (err) {
-            if (err.name !== 'NavigationDuplicated') {
-              throw err;
-            }
+        this.$router.push({ query }).catch((err) => {
+          if (err.name !== 'NavigationDuplicated') {
+            throw err;
           }
+        });
       },
     },
     date: {
@@ -53,14 +42,11 @@ export default {
       set: function (newValue) {
         const query = { ...this.$route.query, date: newValue };
         if (newValue === 'all') delete query.date;
-        if (query !== this.$route.query && !isEmpty(query))
-          try {
-            this.$router.push({ query });
-          } catch (err) {
-            if (err.name !== 'NavigationDuplicated') {
-              throw err;
-            }
+        this.$router.push({ query }).catch((err) => {
+          if (err.name !== 'NavigationDuplicated') {
+            throw err;
           }
+        });
       },
     },
     participation: {
@@ -72,14 +58,11 @@ export default {
       set: function (newValue) {
         const query = { ...this.$route.query, participation: newValue };
         if (newValue === 'all') delete query.participation;
-        if (query !== this.$route.query && !isEmpty(query))
-          try {
-            this.$router.push({ query });
-          } catch (err) {
-            if (err.name !== 'NavigationDuplicated') {
-              throw err;
-            }
+        this.$router.push({ query }).catch((err) => {
+          if (err.name !== 'NavigationDuplicated') {
+            throw err;
           }
+        });
       },
     },
     search: {
@@ -90,14 +73,11 @@ export default {
       set: function (newValue) {
         const query = { ...this.$route.query, search: newValue };
         if (newValue === '') delete query.search;
-        if (query !== this.$route.query)
-          try {
-            this.$router.push({ query });
-          } catch (err) {
-            if (err.name !== 'NavigationDuplicated') {
-              throw err;
-            }
+        this.$router.push({ query }).catch((err) => {
+          if (err.name !== 'NavigationDuplicated') {
+            throw err;
           }
+        });
       },
     },
   },
