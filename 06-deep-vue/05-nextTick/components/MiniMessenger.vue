@@ -1,7 +1,7 @@
 <template>
   <main>
-    <messages-list class="messages" :messages="messages" />
-    <form @submit.prevent="send" style="display: flex;">
+    <messages-list ref="messageList" class="messages" :messages="messages" />
+    <form @submit.prevent="send" style="display: flex">
       <input type="text" placeholder="New message" v-model="newMessage" />
       <button>Send</button>
     </form>
@@ -31,11 +31,13 @@ export default {
   },
 
   methods: {
-    send() {
+    async send() {
       this.messages.push({
         id: id++,
         text: this.newMessage,
       });
+      await this.$nextTick();
+      this.$refs.messageList.$el.scrollTop = this.$refs.messageList.$el.scrollHeight;
       this.newMessage = '';
     },
   },
