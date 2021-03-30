@@ -12,7 +12,7 @@
         accept="image/*"
         class="form-control-file"
         @change="addFile"
-        :value="value"
+        ref = "input"
       />
     </label>
   </div>
@@ -34,7 +34,6 @@ export default {
   data() {
     return {
       uploading: false, // Загрузка
-      value: undefined,
     };
   },
 
@@ -62,11 +61,10 @@ export default {
       });
     },
     deleteSelectedImg(event) {
-      debugger;
       if (this.imageId) {
         this.$emit('change', null);
         console.dir(event.target);
-        this.value = undefined;
+        this.$refs.input.value = '';
         event.preventDefault();
       }
     },
