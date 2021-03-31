@@ -4,16 +4,23 @@ const NodesPagination = require(getSolutionPath(
   'components/NodesPagination.vue',
 )).default;
 
+const functionalMount = (component, options) => mount({
+  props: component.props,
+  render(h) {
+    return h(component, { props: this.$props }, this.$slots.default);
+  },
+}, options);
+
 describe('deep-vue/NodesPagination', () => {
   describe('NodesPagination', () => {
     it('NodesPagination должен иметь числовые параметры page и perPage', async () => {
-      const wrapper = mount(NodesPagination);
+      const wrapper = functionalMount(NodesPagination);
       expect(wrapper.vm.$options.props.page.type).toBe(Number);
       expect(wrapper.vm.$options.props.perPage.type).toBe(Number);
     });
 
     it('NodesPagination должен выводить элементы текущей страницы', async () => {
-      const wrapper = mount(NodesPagination, {
+      const wrapper = functionalMount(NodesPagination, {
         propsData: {
           page: 1,
           perPage: 3,
