@@ -1,6 +1,6 @@
 <template>
-  <div id="app" style="width: 250px; margin: 2rem auto;">
-    <div style="display: flex; justify-content: space-between;">
+  <div id="app" style="width: 250px; margin: 2rem auto">
+    <div style="display: flex; justify-content: space-between">
       <button
         v-for="i in 5"
         :key="i"
