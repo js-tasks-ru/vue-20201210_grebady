@@ -5,6 +5,7 @@
   >
     <slot name="left-icon"></slot>
     <input
+      ref="input"
       class="form-control"
       :value="value"
       v-bind="$attrs"
