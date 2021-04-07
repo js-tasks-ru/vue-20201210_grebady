@@ -8,19 +8,26 @@
     <p><app-checkbox v-model="checkedArray" value="C">Check C</app-checkbox></p>
     <p>Checked: {{ checkedArray }}</p>
     <p>
-      <button @click="checked = !checked">
-        Update Bool
-      </button>
+      <button @click="checked = !checked">Update Bool</button>
     </p>
     <p>
       <button
         @click="
           !checkedArray.includes('A')
             ? checkedArray.push('A')
-            : checkedArray.pop()
+            : checkedArray.splice(checkedArray.indexOf('A'), 1)
         "
       >
-        Update Array
+        Update Array A
+      </button>
+      <button
+        @click="
+          !checkedArray.includes('B')
+            ? checkedArray.push('B')
+            : checkedArray.splice(checkedArray.indexOf('B'), 1)
+        "
+      >
+        Update Array B
       </button>
     </p>
   </div>
