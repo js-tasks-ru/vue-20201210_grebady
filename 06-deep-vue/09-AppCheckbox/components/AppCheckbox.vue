@@ -1,11 +1,10 @@
 <template>
   <label class="checkbox">
     <input
+      v-on="$listeners"
       v-bind="$attrs"
-      v-on="listenersMissInput"
+      v-model="complexValue"
       :value="value"
-      :checked="isChecked"
-      :ArrValue="complexValue"
       type="checkbox"
     />
     <slot />
@@ -17,53 +16,24 @@
 export default {
   name: 'AppCheckbox',
 
-  inheritAttrs: false,
-
   props: {
+    checked: {},
     value: {},
-    ArrValue: {},
-    ArrChecked: {},
   },
 
   computed: {
     complexValue: {
       get() {
-        return this.ArrValue;
+        return this.checked;
       },
       set(newValue) {
-        // debugger;
-        if (!Array.isArray(this.ArrValue)) this.$emit('change', newValue);
-        else {
-          if (!this.ArrValue.includes(this.value)) {
-            this.ArrValue.push(this.value);
-          } else {
-            this.ArrValue.splice(this.ArrValue.indexOf(this.value), 1);
-          }
-          this.$emit('change', this.ArrValue);
-        }
+        this.$emit('change', newValue);
       },
     },
-    listenersMissInput() {
-      return {
-        ...this.$listeners,
-        change: ($event) => {
-          console.log($event);
-          this.complexValue = $event.target.checked;
-        },
-      };
-    },
-    isChecked() {
-      if (this.$attrs.checked) return this.$attrs.checked;
-
-      if (!Array.isArray(this.complexValue)) {
-        return this.complexValue;
-      } else {
-        return this.complexValue.includes(this.value);
-      }
-    },
   },
+
   model: {
-    prop: 'ArrValue',
+    prop: 'checked',
     event: 'change',
   },
 };
