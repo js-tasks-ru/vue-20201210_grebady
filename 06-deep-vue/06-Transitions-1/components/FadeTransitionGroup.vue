@@ -1,4 +1,14 @@
-<template></template>
+<template>
+  <transition-group
+    name="fade-list"
+    mode="out"
+    class="fade-list"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <slot></slot>
+  </transition-group>
+</template>
 
 <script>
 export default {
@@ -6,7 +16,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .fade-list {
   position: relative;
 }

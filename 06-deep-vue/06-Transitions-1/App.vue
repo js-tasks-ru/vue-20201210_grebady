@@ -29,7 +29,7 @@ export default {
   components: { FadeTransitionGroup, FadeTransition },
   data() {
     return {
-      view: 0,
+      view: true,
       list: [
         Math.random(),
         Math.random(),
