@@ -1,7 +1,7 @@
 <template>
   <label class="checkbox">
     <input
-      v-on="$listeners"
+      v-on="listeners"
       v-bind="$attrs"
       v-model="complexValue"
       :value="value"
@@ -29,6 +29,12 @@ export default {
       set(newValue) {
         this.$emit('change', newValue);
       },
+    },
+    listeners() {
+      return {
+        ...this.$listeners,
+        change: undefined,
+      };
     },
   },
 
